@@ -244,6 +244,7 @@ public class MapperMethod {
     }
 
     public String getName() {
+      //mappedStatement的id
       return name;
     }
 
@@ -254,11 +255,13 @@ public class MapperMethod {
     private MappedStatement resolveMappedStatement(Class<?> mapperInterface, String methodName,
         Class<?> declaringClass, Configuration configuration) {
       String statementId = mapperInterface.getName() + "." + methodName;
+      //configuration 中statementId为key 获得 MappedStatement
       if (configuration.hasStatement(statementId)) {
         return configuration.getMappedStatement(statementId);
       } else if (mapperInterface.equals(declaringClass)) {
         return null;
       }
+      //父接口里面是否有statementId
       for (Class<?> superInterface : mapperInterface.getInterfaces()) {
         if (declaringClass.isAssignableFrom(superInterface)) {
           MappedStatement ms = resolveMappedStatement(superInterface, methodName,

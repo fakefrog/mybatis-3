@@ -28,11 +28,16 @@ public class ExamplePlugin implements Interceptor {
 
   @Override
   public Object intercept(Invocation invocation) throws Throwable {
-    return invocation.proceed();
+    //自定义一些逻辑
+    System.out.println(1);
+    Object proceed = invocation.proceed();
+    System.out.println(2);
+    return proceed;
   }
 
   @Override
   public Object plugin(Object target) {
+    //代理模式创建target的  每次调用target的方法便调用invocationHandler
     return Plugin.wrap(target, this);
   }
 

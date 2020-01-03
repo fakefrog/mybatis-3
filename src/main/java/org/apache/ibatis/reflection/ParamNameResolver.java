@@ -116,6 +116,7 @@ public class ParamNameResolver {
     } else {
       final Map<String, Object> param = new ParamMap<>();
       int i = 0;
+      //sortedMap 其实是有排序的  param1,value1   param2,value2
       for (Map.Entry<Integer, String> entry : names.entrySet()) {
         param.put(entry.getValue(), args[entry.getKey()]);
         // add generic param names (param1, param2, ...)
